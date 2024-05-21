@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SendGrid Gmail Email Filter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>SendGrid Gmail Email Filter</h2>
+        <div class="input-group">
+            <input type="file" id="csvFileInput" accept=".csv">
+        </div>
+        <div id="headerSelectContainer" class="input-group hidden">
+            <label for="headerSelect">Select Email Column:</label>
+            <select id="headerSelect"></select>
+        </div>
+        <button id="processButton" class="button hidden">Process CSV</button>
+        <a id="downloadLink" class="button hidden">Download Cleaned CSV</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
