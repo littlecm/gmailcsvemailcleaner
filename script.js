@@ -42,15 +42,33 @@ function populateHeaderSelect(headers) {
 function processCSV() {
     const selectedHeaderIndex = document.getElementById('headerSelect').value;
     const lines = csvContent.split('\n');
+    let gmailCount = 0;
+    
     const filteredLines = lines.filter((line, index) => {
         if (index === 0) return true; // Keep the header row
         const columns = line.split(',');
         const email = columns[selectedHeaderIndex].trim();
-        return !email.toLowerCase().includes('@gmail.com');
+        if (email.toLowerCase().includes('@gmail.com')) {
+            gmailCount++;
+            return false;
+        }
+        return true;
     });
 
     const cleanedCSVContent = filteredLines.join('\n');
+    displayRemovedCount(gmailCount);
     downloadCSV(cleanedCSVContent);
+}
+
+function displayRemovedCount(count) {
+    const resultCard = document.getElementById('resultCard');
+    resultCard.innerHTML = `
+        <div class="card">
+            <h3>Processing Results</h3>
+            <p>Number of Gmail addresses removed: <strong>${count}</strong></p>
+        </div>
+    `;
+    resultCard.classList.remove('hidden');
 }
 
 function downloadCSV(content) {
