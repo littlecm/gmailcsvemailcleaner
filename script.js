@@ -72,16 +72,14 @@ function displayRemovedCount(count) {
 }
 
 function downloadCSV(content) {
-    const csvFileInput = document.getElementById('csvFileInput');
-    const originalFileName = csvFileInput.files[0].name;
-    const newFileName = originalFileName.replace('.csv', '-cleaned-Google.csv');
-
     const blob = new Blob([content], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const link = document.getElementById('downloadLink');
     
     link.href = url;
-    link.download = newFileName;
+    link.download = 'cleaned-Google.csv';
     link.classList.remove('hidden');
-    link.textContent = `Download ${newFileName}`;
+
+    // Hide process button and show download button
+    document.getElementById('processButton').classList.add('hidden');
 }
