@@ -43,10 +43,13 @@ function processCSV() {
     const selectedHeaderIndex = document.getElementById('headerSelect').value;
     const lines = csvContent.split('\n');
     let gmailCount = 0;
-    
+
     const filteredLines = lines.filter((line, index) => {
         if (index === 0) return true; // Keep the header row
         const columns = line.split(',');
+        if (columns.length <= selectedHeaderIndex || !columns[selectedHeaderIndex]) {
+            return true; // Skip lines that do not have the selected column
+        }
         const email = columns[selectedHeaderIndex].trim();
         if (email.toLowerCase().includes('@gmail.com')) {
             gmailCount++;
@@ -59,6 +62,7 @@ function processCSV() {
     displayRemovedCount(gmailCount);
     downloadCSV(cleanedCSVContent);
 }
+
 
 function displayRemovedCount(count) {
     const resultCard = document.getElementById('resultCard');
